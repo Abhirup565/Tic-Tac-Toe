@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #002e4d;
+			background-repeat: no-repeat;
+			background-size: 100% 100em;
+			font-family: Leelawadee UI;
+		}
+		.cover{
+			position: absolute;
+			top: 0;
+			background: rgba(16, 16, 16, 0.5);
+    		backdrop-filter: blur(8px);
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			display: none;
+		}
+		.cards{
+			position: absolute;
+			left: 50%;
+			top: 5%;
+			width: 100%;
+			height: 8em;
+			transform: translate(-50%);
+		}
+		.player1card{
+			position: absolute;
+			left: 3%;
+			top: 0;
+			height: 14vh;
+			width: 45%;
+			background: #006080;
+			text-align: center;
+			overflow-y: hidden;
+			box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.5);
+			border-radius: 10px;
+		}
+		.player2card{
+			position: absolute;
+			right: 3%;
+			top: 0;
+			height: 14vh;
+			width: 45%;
+			background: #006080;
+			text-align: center;
+			overflow-y: hidden;
+			box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.6);
+			border-radius: 10px;
+		}
+		.name1,.name2{
+			position: absolute;
+			bottom: 13%;
+			left: 50%;
+			transform: translate(-50%);
+			height: 30%;
+			width: 90%;
+			/*background: black;*/
+			word-wrap: break-word;
+			color: white;
+			overflow-y: hidden;
+			font-size: 22px;	/*6vw*/
+		}
+		span{
+			position: absolute;
+			color: orange;
+			font-size: 6vw;
+			top: 13%;
+			left: 50%;
+			transform: translate(-50%);
+		}
+		.gameContainer{
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%);
+			top: 28%;
+			/*background: orange;*/
+			width: 20em;
+			height: 20em;
+			display: grid;
+			grid-template-rows: repeat(3, 30vw);
+			grid-template-columns: repeat(3, 30vw);
+			justify-content: center;
+		}
+		.box{
+			border: 1px solid orange;
+			outline: none;
+			background: #002e4d;
+			font-size: 8vw;
+			color: white;
+		}
+		.messageBox{
+			position: absolute;
+			/*top: 25%;*/
+			left: 50%;
+			transform: translate(-50%);
+			top: 30%;
+			width: 95%;
+			background: #002e4d;
+			/*height: 15em;*/
+			height: 10vh;
+			z-index: 2;
+			display: none;
+			border-radius: 10px;
+		}
+		.message{
+			color: white;
+			position: absolute;
+			top: 4%;
+			left: 50%;
+			transform: translate(-50%);
+		}
+		hr{
+			position: absolute;
+			/*top: 24%;*/
+			left: 50%;
+			transform: translate(-50%);
+			top: 32%;
+			width: 95%;
+		}
+		.winnerName{
+			position: absolute;
+			top: 35%;
+			left: 50%;
+			transform: translate(-50%);
+			color: yellow;
+			font-size: 8vw;
+			font-weight: bold;
+			text-align: center;
+			word-wrap: break-word;
+			height: 1.5em;
+			width: 80%;
+			overflow-y: hidden;
+		}
+		.rematchBtn{
+			position: absolute;
+			border: none;
+			outline: none;
+			background: linear-gradient(#40ff00,#1a6600);
+			font-size: 20px;
+			font-weight: bold;
+			color: #002e4d;
+			bottom: 15%;
+			left: 9%;
+			padding: 10px 20px 10px 20px;
+			border-radius: 5px;
+		}
+		.quitBtn{
+			position: absolute;
+			border: none;
+			outline: none;
+			background: linear-gradient(#ff5c33,#661400);
+			font-size: 20px;
+			font-weight: bold;
+			color: #ffc2b3;
+			bottom: 15%;
+			right: 9%;
+			padding: 10px 45px 10px 45px;
+			border-radius: 5px;
+		}
+		.resetBtn{
+			position: absolute;
+			bottom: 3%;
+			left: 5%;
+			border: none;
+			outline: none;
+			color: orange;
+			box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.6);
+			background: #006080;
+			font-size: 25px;
+			padding: 2vh;
+			border-radius: 50px;
+		}
+		.exitBtn{
+			position: absolute;
+			bottom: 3%;
+			right: 5%;
+			border: none;
+			outline: none;
+			color: orange;
+			box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.6);
+			background: #006080;
+			font-size: 25px;
+			padding: 2vh;
+			border-radius: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="cover"></div>
+	<div class="cards">
+		<div class="player1card">
+			<span><i class="fa-solid fa-xmark"></i></span>
+			<h2 class="name1"></h2>
+		</div>
+		<div class="player2card">
+			<span><i class="fa-regular fa-circle"></i></span>
+			<h2 class="name2"></h2>
+		</div>
+	</div>
+	<div class="gameContainer">
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+		<button class="box"></button>
+	</div>
+	<div class="messageBox">
+		<h1 class="message">Draw!</h1>
+		<hr></hr>
+		<p class="winnerName"></p>
+		<button class="rematchBtn">Rematch</button>
+		<a href="index.html"><button class="quitBtn">Quit</button></a>
+	</div>
+	<button class="resetBtn"><i class="fa-solid fa-rotate-right"></i></button>
+	<a href="index.html"><button class="exitBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
+	<script type="text/javascript" src="gamescript.js"></script>
+</body>
+</html>

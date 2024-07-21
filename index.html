@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tic Tac Toe</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: linear-gradient(#002e4d,#00ace6);
+			background-repeat: no-repeat;
+			background-size: 100% 100em;
+			font-family: Leelawadee UI;
+		}
+		.cover{
+			position: absolute;
+			top: 0;
+			background: rgba(16, 16, 16, 0.5);
+    		backdrop-filter: blur(20px);
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			display: none;
+		}
+		.heading{
+			color: white;
+			font-family: "Exo 2", sans-serif;
+			font-size: 100px;
+			display: flex;
+			justify-content: center;
+			margin-top: 10%;
+			text-align: center;
+		}
+		.startBtn{
+			background: orange;
+			border: none;
+			outline: none;
+			border-radius: 60px;
+			color: #002e4d;
+			font-size: 30px;
+			width: 70%;
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%);
+			margin-top: 20%;
+			font-weight: bold;
+			padding: 8px 20px 8px 20px;
+		}
+		.titleChoose{
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%);
+			top: 20%;
+			background: #002e4d;
+			width: 100%;
+			height: 20em;
+    		z-index: 2;
+    		box-shadow: 0 0px 15px 0px rgba(0, 0, 0, 1.0);
+    		display: none;
+		}
+		ul{
+			margin-top: 18%;
+		}
+		li{
+			margin-bottom: 3.5em;
+		}
+		.player1div,.player2div{
+			position: absolute;
+			width: 94%;
+			height: 16%;
+			margin-bottom: 10px;
+			left: 50%;
+			transform: translate(-50%);
+			border-radius: 5px;
+			background: #004b66;
+			display: flex;
+			align-items: center;
+		}
+		.player1Name,.player2Name{
+			position: absolute;
+			font-size: 22px;
+			color: white;
+			background: #004b66;
+			right: 2%;
+			width: 84%;
+			border: none;
+			outline: none;
+		}
+		.playBtn{
+			position: absolute;
+			outline: none;
+			border: none;
+			left: 50%;
+			transform: translate(-50%);
+			background: orange;
+			border-radius: 50px;
+			font-size: 25px;
+			font-weight: bold;
+			color: #002e4d;
+			padding: 8px 20px 8px 20px;
+			width: 60%;
+			bottom: 12%;
+		}
+		.crossBtn{
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			font-size: 24px;
+			color: orange;
+		}
+		.playerSign{
+			color: orange;
+			position: absolute;
+			z-index: 1;
+			left: 4%;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="cover"></div>
+	<p class="heading">TIC<br>TAC<br>TOE</p>
+	<button class="startBtn">Start</button>
+	<div class="titleChoose">
+		<span class="crossBtn"><i class="bi bi-x-lg"></i></span>
+		<ul>
+			<li><div class="player1div"><span class="playerSign"><i class="fa-solid fa-xmark"></i></span><input type="text" class="player1Name" value="Player1"></div></li>
+			<li><div class="player2div"><span class="playerSign"><i class="fa-regular fa-circle"></i></span><input type="text" class="player2Name" value="Player2"></div></li>
+		</ul>
+		<a href="game.html"><button class="playBtn">Play!</button></a>
+	</div>
+	<script type="text/javascript">
+		document.querySelector('.startBtn').addEventListener('click', ()=>{
+			document.querySelector('.cover').style.display = "block";
+			document.querySelector('.titleChoose').style.display = "block";
+		})
+		document.querySelector('.crossBtn').addEventListener('click', ()=>{
+			document.querySelector('.cover').style.display = "none";
+			document.querySelector('.titleChoose').style.display = "none";
+			document.querySelector('.player1Name').value = "Player1";
+			document.querySelector('.player2Name').value = "Player2";
+		})
+		document.querySelector('.playBtn').addEventListener('click', ()=>{
+			let name1 = document.querySelector('.player1Name').value;
+			let name2 = document.querySelector('.player2Name').value;
+			localStorage.setItem("playerX",name1);
+			localStorage.setItem("playerO",name2);
+		})
+	</script>
+</body>
+</html>
